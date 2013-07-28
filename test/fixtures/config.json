@@ -1,0 +1,7 @@
+{
+    // That's a CJSON valid file
+    "my": {
+        "key": 123
+    },
+    "foobar": true
+}

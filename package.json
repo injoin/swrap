@@ -1,10 +1,36 @@
 {
     "name": "swrap",
-    "description": "",
+    "description": "Simple Node service wrapper, with basic support for configs and classes.",
     "version": "0.0.1",
+    "author": "Gustavo Henke <gustavo@injoin.com.br>",
+    "keywords": [
+        "app",
+        "service",
+        "wrapper",
+        "wrap",
+        "config",
+        "cjson",
+        "class",
+        "oop"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git@github.com/injoin/swrap.git"
+    },
     "dependencies": {
         "cjson": "0.2.1",
         "dotty": "0.0.2",
         "lodashed": "0.0.1"
-    }
+    },
+    "devDependencies": {
+        "chai": "~1.7.2",
+        "mocha": "~1.12.0"
+    },
+    "scripts": {
+        "test": "node test/index.js"
+    },
+    "engines": {
+        "node": ">=0.8.0"
+    },
+    "license": "MIT"
 }

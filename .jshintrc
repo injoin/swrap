@@ -5,11 +5,22 @@
     "eqnull":           true,
     "curly":            true,
     "undef":            true,
+    "newcap":           false,
+    "expr":             true,
 
     "quotmark":         "double",
     "maxlen":           100,
     "maxparams":        5,
     "maxcomplexity":    10,
 
-    "node":             true
+    "node":             true,
+
+    "predef": [
+        "swrap",
+        "suite",
+        "test",
+        "setup",
+        "teardown",
+        "expect"
+    ]
 }

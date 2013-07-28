@@ -14,5 +14,10 @@
         swrap[ lib ] = require( "./lib/" + lib )( swrap );
     });
 
+    // Expose globally swrap.
+    swrap.expose = function() {
+        global.swrap = swrap;
+    };
+
     module.exports = swrap;
 })();
