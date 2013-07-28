@@ -1,0 +1,10 @@
+{
+    "name": "swrap",
+    "description": "",
+    "version": "0.0.1",
+    "dependencies": {
+        "cjson": "0.2.1",
+        "dotty": "0.0.2",
+        "lodashed": "0.0.1"
+    }
+}

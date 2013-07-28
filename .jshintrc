@@ -1,0 +1,15 @@
+{
+    "strict":           true,
+    "noempty":          true,
+    "eqeqeq":           true,
+    "eqnull":           true,
+    "curly":            true,
+    "undef":            true,
+
+    "quotmark":         "double",
+    "maxlen":           100,
+    "maxparams":        5,
+    "maxcomplexity":    10,
+
+    "node":             true
+}
