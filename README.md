@@ -1,4 +1,4 @@
-# swrap [![Build Status](https://travis-ci.org/injoin/swrap.png?branch=master)](https://travis-ci.org/injoin/swrap)
+# swrap [![Build Status](https://travis-ci.org/injoin/swrap.png?branch=master)](https://travis-ci.org/injoin/swrap) [![NPM version](https://badge.fury.io/js/swrap.png)](http://badge.fury.io/js/swrap)
 
 Simple Node service wrapper, with basic support for configs and classes.
 Example:
