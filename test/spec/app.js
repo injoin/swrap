@@ -48,6 +48,27 @@ suite( "App", function() {
         });
     });
 
+    suite( ".require()", function() {
+        test( "returns the return of the module function", function() {
+            var fixture;
+            var service = {};
+
+            this.app.set( "foo", service );
+            fixture = this.app.require( "../fixtures/service-context", "foo" );
+
+            expect( fixture ).to.deep.equal([
+                service,
+                this.app,
+                swrap
+            ]);
+        });
+
+        test( "returns the module if not a function", function() {
+            var fixture = this.app.require( "../fixtures/service-context2", "foo" );
+            expect( fixture ).to.equal( "foobar" );
+        });
+    });
+
     test( "contains a configuration storage", function() {
         expect( this.app.config ).to.be.an.instanceof( swrap.config );
     });
