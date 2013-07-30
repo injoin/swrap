@@ -48,6 +48,13 @@ suite( "App", function() {
         });
     });
 
+    test( ".remove()", function() {
+        this.app.set( "foo", {} );
+        this.app.remove( "foo" );
+
+        expect( this.app._services ).to.deep.equal({});
+    });
+
     suite( ".require()", function() {
         test( "returns the return of the module function", function() {
             var fixture;
