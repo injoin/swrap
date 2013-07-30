@@ -1,0 +1,9 @@
+# Version 0.0.2
+* Added `app.require()` method, which will allow to require things within the scope of a service
+* Added `app.remove()` method, to detach services from the app
+* Added `config.size()` method, to determine the size of a config storage
+* Config class will now emit the `change` event when a `set()` call is made
+* JSCoverage support - 100% coverage
+
+# Version 0.0.1
+* Initial version
