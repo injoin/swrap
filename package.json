@@ -24,10 +24,14 @@
     },
     "devDependencies": {
         "chai": "~1.7.2",
-        "mocha": "~1.12.0"
+        "mocha": "~1.12.0",
+        "jscoverage": "~0.3.7"
     },
     "scripts": {
-        "test": "node test/index.js"
+        "prepublish": "npm prune",
+        "pretest": "node node_modules/jscoverage/bin/jscoverage lib",
+        "test": "node test/index.js",
+        "posttest": "node test/index.js --SWRAP_COV > test/coverage.html"
     },
     "engines": {
         "node": ">=0.8.0"

@@ -7,7 +7,8 @@ suite( "Class", function() {
     setup(function() {
         this.proto = {
             a: true,
-            b: function() {}
+            b: function() {},
+            _f: "foo"
         };
         this.statics = {
             c: 123,

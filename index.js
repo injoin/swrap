@@ -1,23 +1,4 @@
-(function() {
-    "use strict";
-
-    /**  @namespace */
-    var swrap = {};
-    swrap._ = require( "lodashed" );
-    swrap.util = require( "util" );
-
-    [
-        "class",
-        "config",
-        "app"
-    ].forEach(function( lib ) {
-        swrap[ lib ] = require( "./lib/" + lib )( swrap );
-    });
-
-    // Expose globally swrap.
-    swrap.expose = function() {
-        global.swrap = swrap;
-    };
-
-    module.exports = swrap;
-})();
+process.env.SWRAP_COV = process.argv.indexOf( "--SWRAP_COV" ) > -1;
+module.exports = process.env.SWRAP_COV === "true" ?
+    require( "./lib-cov/swrap" ) :
+    require( "./lib/swrap" );

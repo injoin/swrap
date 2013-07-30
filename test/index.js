@@ -27,7 +27,7 @@
         // Run tests when called via node CLI
         var mocha = new ( require( "mocha" ) )({
             ui: "tdd",
-            reporter: "spec"
+            reporter: process.env.SWRAP_COV === "true" ? "html-cov" : "spec"
         });
 
         files.forEach(function( file ) {

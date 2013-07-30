@@ -76,6 +76,11 @@ suite( "App", function() {
         });
     });
 
+    test( "constructs app root from process relative path", function() {
+        var app = swrap.app( "." );
+        expect( app.path() ).to.equal( process.cwd() );
+    });
+
     test( "contains a configuration storage", function() {
         expect( this.app.config ).to.be.an.instanceof( swrap.config );
     });
