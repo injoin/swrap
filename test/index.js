@@ -6,6 +6,7 @@
     var swrap = require( ".." );
 
     // Expose some globals
+    global.sinon = require( "sinon" );
     global.expect = require( "chai" ).expect;
     swrap.expose();
 

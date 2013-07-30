@@ -7,6 +7,10 @@ suite( "Config", function() {
         this.cfg = config();
     });
 
+    test( "is EventEmitter", function() {
+        expect( this.cfg ).to.be.an.instanceof( require( "events" ).EventEmitter );
+    });
+
     test( ".clear()", function() {
         this.cfg.set( "key", true );
         this.cfg.set( "my.awesome.key", "foobar" );
@@ -15,12 +19,24 @@ suite( "Config", function() {
         expect( this.cfg._storage ).to.deep.equal({});
     });
 
-    test( ".set()", function() {
-        this.cfg.set( "key", true );
-        expect( this.cfg._storage.key ).to.equal( true );
+    suite( ".set()", function() {
+        test( "sets new value", function() {
+            this.cfg.set( "key", true );
+            expect( this.cfg._storage.key ).to.equal( true );
 
-        this.cfg.set( "nested.key.works.too", 123 );
-        expect( this.cfg._storage.nested.key.works.too ).to.equal( 123 );
+            this.cfg.set( "nested.key.works.too", 123 );
+            expect( this.cfg._storage.nested.key.works.too ).to.equal( 123 );
+        });
+
+        test( "emits 'change' event", function() {
+            var spy = sinon.spy();
+            this.cfg.on( "change", spy );
+            this.cfg.set( "foo", "bar" );
+
+            expect( spy.args[ 0 ][ 0 ] ).to.equal( "foo" );
+            expect( spy.args[ 0 ][ 1 ] ).to.equal( "bar" );
+            expect( spy.args[ 0 ][ 2 ] ).to.equal( this.cfg );
+        });
     });
 
     test( ".get()", function() {

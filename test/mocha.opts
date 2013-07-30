@@ -1,3 +1,4 @@
 --reporter spec
 --ui tdd
---globals expect,injoin
+--globals expect,injoin,sinon
+--check-leaks

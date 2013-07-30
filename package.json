@@ -25,13 +25,15 @@
     "devDependencies": {
         "chai": "~1.7.2",
         "mocha": "~1.12.0",
-        "jscoverage": "~0.3.7"
+        "jscoverage": "~0.3.7",
+        "sinon": "~1.7.3"
     },
     "scripts": {
         "prepublish": "npm prune",
-        "pretest": "node node_modules/jscoverage/bin/jscoverage lib",
         "test": "node test/index.js",
-        "posttest": "node test/index.js --SWRAP_COV > test/coverage.html"
+        "posttest": "npm run-script coverage",
+        "precoverage": "node node_modules/jscoverage/bin/jscoverage lib",
+        "coverage": "node test/index.js --SWRAP_COV > test/coverage.html"
     },
     "engines": {
         "node": ">=0.8.0"

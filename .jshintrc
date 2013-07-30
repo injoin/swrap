@@ -21,6 +21,7 @@
         "test",
         "setup",
         "teardown",
-        "expect"
+        "expect",
+        "sinon"
     ]
 }
