@@ -60,4 +60,12 @@ suite( "Config", function() {
             expect( this.cfg.has( "baz.foobar" ) ).to.be.ok;
         });
     });
+
+    test( ".size()", function() {
+        this.cfg.set( "foo.bar", "baz" );
+        this.cfg.set( "triple.foo", 123 );
+        this.cfg.set( "double.bar", function() {});
+
+        expect( this.cfg.size() ).to.equal( 3 );
+    });
 });
