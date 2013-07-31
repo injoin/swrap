@@ -5,7 +5,7 @@ suite( "App", function() {
     var App = swrap.app;
 
     setup(function() {
-        this.app = new App( __dirname );
+        this.app = new App( path.resolve( __dirname, "../fixtures" ) );
     });
 
     teardown(function() {
@@ -14,7 +14,11 @@ suite( "App", function() {
 
     test( ".path()", function() {
         var testPath = this.app.path( "path", "to", "file.json" );
-        expect( testPath ).to.equal( path.join( __dirname, "path", "to", "file.json" ) );
+        expect( testPath ).to.equal(path.join(
+            __dirname,
+            "../fixtures",
+            "path", "to", "file.json"
+        ));
     });
 
     suite( ".set()", function() {
@@ -61,7 +65,7 @@ suite( "App", function() {
             var service = {};
 
             this.app.set( "foo", service );
-            fixture = this.app.require( "../fixtures/service-context", "foo" );
+            fixture = this.app.require( "service-context", "foo" );
 
             expect( fixture ).to.deep.equal([
                 service,
@@ -71,8 +75,39 @@ suite( "App", function() {
         });
 
         test( "returns the module if not a function", function() {
-            var fixture = this.app.require( "../fixtures/service-context2", "foo" );
+            var fixture = this.app.require( "service-context2", "foo" );
             expect( fixture ).to.equal( "foobar" );
+        });
+    });
+
+    suite( ".lib()", function() {
+        test( "returns null if empty name", function() {
+            expect( this.app.lib() ).to.be.null;
+        });
+
+        test( "returns null for inexistent libs", function() {
+            expect( this.app.lib( "barbaz" ) ).to.be.null;
+        });
+
+        test( "lib args are app and swrap", function() {
+            var lib = this.app.lib( "foo" );
+            expect( lib.args ).to.deep.equal([
+                this.app,
+                swrap
+            ]);
+        });
+
+        test( "lib context is app", function() {
+            var lib = this.app.lib( "foo" );
+            expect( lib.context ).to.equal( this.app );
+        });
+
+        test( "load lib only once", function() {
+            var lib;
+            this.app.lib( "foo" );
+            lib = this.app.lib( "foo" );
+
+            expect( lib.loadCount ).to.equal( 1 );
         });
     });
 
