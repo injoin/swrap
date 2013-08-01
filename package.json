@@ -1,7 +1,7 @@
 {
     "name": "swrap",
     "description": "Simple Node service wrapper, with basic support for configs and classes.",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "author": "Gustavo Henke <gustavo@injoin.com.br>",
     "keywords": [
         "app",
