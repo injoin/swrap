@@ -20,7 +20,8 @@
     "dependencies": {
         "cjson": "0.2.1",
         "dotty": "0.0.2",
-        "lodashed": "0.0.1"
+        "lodashed": "0.0.1",
+        "eventemitter2": "0.4.12"
     },
     "devDependencies": {
         "chai": "~1.7.2",
