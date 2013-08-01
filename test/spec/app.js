@@ -1,8 +1,16 @@
 suite( "App", function() {
     "use strict";
 
+    var EventEmitter2 = require( "eventemitter2" ).EventEmitter2;
     var path = require( "path" );
     var App = swrap.app;
+
+    suiteSetup(function() {
+        this.service = {};
+
+        this.stub = sinon.stub();
+        this.stub.callsArgWith( 0, this.service );
+    });
 
     setup(function() {
         this.app = new App( path.resolve( __dirname, "../fixtures" ) );
@@ -23,11 +31,10 @@ suite( "App", function() {
 
     suite( ".set()", function() {
         test( "service instances", function() {
-            var service = new swrap.class();
-            this.app.set( "foo", service );
+            this.app.set( "foo", this.stub );
 
             expect( this.app._services ).to.deep.equal({
-                foo: service
+                foo: this.service
             });
         });
 
@@ -37,14 +44,26 @@ suite( "App", function() {
 
             expect( this.app._services ).to.deep.equal({});
         });
+
+        test( "skip " )
+
+        test( "trigger 'service.foo' event", function() {
+            var spy = sinon.spy();
+            this.app.on( "service.foo", spy );
+            this.app.set( "foo", this.stub );
+
+            expect( spy.calledOnce ).to.be.ok;
+            expect( spy.args[ 0 ] ).to.deep.equal([
+                this.service,
+                this.app
+            ]);
+        });
     });
 
     suite( ".get()", function() {
         test( "returns the specified service instance", function() {
-            var service = {};
-            this.app.set( "foo", service );
-
-            expect( this.app.get( "foo" ) ).to.equal( service );
+            this.app.set( "foo", this.stub );
+            expect( this.app.get( "foo" ) ).to.equal( this.service );
         });
 
         test( "returns null for inexistent services", function() {
@@ -52,23 +71,35 @@ suite( "App", function() {
         });
     });
 
-    test( ".remove()", function() {
-        this.app.set( "foo", {} );
-        this.app.remove( "foo" );
+    suite( ".remove()", function() {
+        test( "detach service", function() {
+            this.app.set( "foo", this.stub );
+            this.app.remove( "foo" );
 
-        expect( this.app._services ).to.deep.equal({});
+            expect( this.app._services ).to.deep.equal({});
+        });
+
+        test( "trigger 'remove.foo' event", function() {
+            var spy = sinon.spy();
+            this.app.on( "remove.foo", spy );
+
+            this.app.set( "foo", this.stub );
+            this.app.remove( "foo" );
+
+            expect( spy.calledOnce ).to.be.ok;
+            expect( spy.args[ 0 ] ).to.deep.equal([ this.app ]);
+        });
     });
 
     suite( ".require()", function() {
         test( "returns the return of the module function", function() {
             var fixture;
-            var service = {};
 
-            this.app.set( "foo", service );
+            this.app.set( "foo", this.stub );
             fixture = this.app.require( "service-context", "foo" );
 
             expect( fixture ).to.deep.equal([
-                service,
+                this.service,
                 this.app,
                 swrap
             ]);
@@ -109,6 +140,10 @@ suite( "App", function() {
 
             expect( lib.loadCount ).to.equal( 1 );
         });
+    });
+
+    test( "it's an EventEmitter2", function() {
+        expect( this.app ).to.be.an.instanceof( EventEmitter2 );
     });
 
     test( "constructs app root from process relative path", function() {
