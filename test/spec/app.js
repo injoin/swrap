@@ -45,8 +45,6 @@ suite( "App", function() {
             expect( this.app._services ).to.deep.equal({});
         });
 
-        test( "skip " )
-
         test( "trigger 'service.foo' event", function() {
             var spy = sinon.spy();
             this.app.on( "service.foo", spy );
@@ -92,11 +90,12 @@ suite( "App", function() {
     });
 
     suite( ".require()", function() {
-        test( "returns the return of the module function", function() {
-            var fixture;
-
+        setup(function() {
             this.app.set( "foo", this.stub );
-            fixture = this.app.require( "service-context", "foo" );
+        });
+
+        test( "returns the return of the module function", function() {
+            var fixture = this.app.require( "service-context", "foo" );
 
             expect( fixture ).to.deep.equal([
                 this.service,
@@ -108,6 +107,25 @@ suite( "App", function() {
         test( "returns the module if not a function", function() {
             var fixture = this.app.require( "service-context2", "foo" );
             expect( fixture ).to.equal( "foobar" );
+        });
+
+        suite( "with module's 1st arg being", function() {
+            test( "the service", function() {
+                var fixture = this.app.require( "service-context", "foo" );
+                expect( fixture[ 0 ] ).to.equal( this.service );
+            });
+
+            test( "the passed object", function() {
+                var obj = {};
+                var fixture = this.app.require( "service-context", obj );
+
+                expect( fixture[ 0 ] ).to.equal( obj );
+            });
+
+            test( "null otherwise", function() {
+                var fixture = this.app.require( "service-context", true );
+                expect( fixture[ 0 ] ).to.equal( null );
+            });
         });
     });
 
