@@ -27,14 +27,14 @@
         "chai": "~1.7.2",
         "mocha": "~1.12.0",
         "jscoverage": "https://github.com/gustavohenke/jscoverage/tarball/master",
-        "sinon": "~1.7.3"
+        "sinon": "~1.7.3",
+        "mocha-lcov-reporter": "0.0.1",
+        "coveralls": "~2.1.0"
     },
     "scripts": {
         "prepublish": "npm prune",
-        "test": "node test/index.js",
-        "posttest": "npm run-script coverage",
-        "precoverage": "node node_modules/jscoverage/bin/jscoverage lib",
-        "coverage": "node test/index.js --SWRAP_COV > test/coverage.html"
+        "pretest": "./node_modules/jscoverage/bin/jscoverage lib lib-cov",
+        "test": "SWRAP_COV=1 ./node_modules/mocha/bin/mocha -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js"
     },
     "engines": {
         "node": ">=0.8.0"
