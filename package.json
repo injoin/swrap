@@ -20,16 +20,16 @@
     "dependencies": {
         "cjson": "0.2.1",
         "dotty": "0.0.2",
-        "lodashed": "0.0.1",
+        "lodashed": "~0.0.2",
         "eventemitter2": "~0.4.13"
     },
     "devDependencies": {
         "chai": "~1.7.2",
-        "mocha": "~1.12.0",
-        "jscoverage": "https://github.com/gustavohenke/jscoverage/tarball/master",
+        "mocha": "~1.13.0",
+        "jscoverage": "~0.3.8",
         "sinon": "~1.7.3",
         "mocha-lcov-reporter": "0.0.1",
-        "coveralls": "~2.1.0"
+        "coveralls": "~2.3.0"
     },
     "scripts": {
         "prepublish": "npm prune",
