@@ -1,7 +1,7 @@
 {
     "name": "swrap",
     "description": "Simple Node service wrapper, with basic support for configs and classes.",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "author": "Gustavo Henke <gustavo@injoin.com.br>",
     "keywords": [
         "app",
@@ -20,16 +20,16 @@
     "dependencies": {
         "cjson": "0.2.1",
         "dotty": "0.0.2",
-        "lodashed": "~0.0.2",
+        "lodashed": "~0.1.2",
         "eventemitter2": "~0.4.13"
     },
     "devDependencies": {
-        "chai": "~1.7.2",
-        "mocha": "~1.13.0",
+        "chai": "~1.8.1",
+        "mocha": "~1.15.1",
         "jscoverage": "~0.3.8",
         "sinon": "~1.7.3",
         "mocha-lcov-reporter": "0.0.1",
-        "coveralls": "~2.3.0"
+        "coveralls": "~2.6.0"
     },
     "scripts": {
         "prepublish": "npm prune",
